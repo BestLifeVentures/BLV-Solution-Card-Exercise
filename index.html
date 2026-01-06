@@ -1,20 +1,28 @@
 <style>
+  :root {
+    --gold: #d4af37;
+    --dark-gold: #b8860b;
+    --slate: #2c3e50;
+    --white: #ffffff;
+  }
+
   .card-container {
     display: flex;
-    gap: 20px;
+    gap: 25px;
     perspective: 1000px;
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     justify-content: center;
     flex-wrap: wrap;
+    padding: 20px;
   }
 
   .quiz-card {
-    width: 300px;
-    height: 400px;
+    width: 320px;
+    height: 450px;
     cursor: pointer;
     position: relative;
     transform-style: preserve-3d;
-    transition: transform 0.6s ease;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .quiz-card.flipped {
@@ -28,64 +36,153 @@
     backface-visibility: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+    padding: 25px;
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     box-sizing: border-box;
+    border: 2px solid var(--gold);
   }
 
   .front {
-    background-color: #2c3e50;
-    color: white;
+    background: linear-gradient(135deg, var(--slate) 0%, #1a252f 100%);
+    color: var(--gold);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
 
   .back {
-    background-color: #f8f9fa;
+    background-color: var(--white);
     color: #333;
     transform: rotateY(180deg);
-    font-size: 0.9rem;
-    line-height: 1.4;
     overflow-y: auto;
   }
 
-  h2 { margin-bottom: 10px; color: #3498db; }
-  .tap-hint { font-size: 0.8rem; margin-top: 20px; opacity: 0.7; }
+  .front h2 { font-size: 2rem; margin: 0; text-transform: uppercase; letter-spacing: 2px; }
+  .front p { font-size: 1.2rem; color: var(--white); opacity: 0.9; }
+  
+  .back h3 { color: var(--dark-gold); margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+  .reason-text { font-size: 0.95rem; line-height: 1.5; margin-bottom: 20px; }
+
+  /* Dropdown Styles */
+  .solution-dropdown {
+    margin-top: auto;
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .solution-trigger {
+    background-color: var(--gold);
+    color: var(--slate);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .solution-content {
+    display: none;
+    padding: 15px;
+    background-color: #fff9e6;
+    font-weight: 600;
+    color: var(--slate);
+    border-top: 1px solid var(--gold);
+  }
+
+  .solution-dropdown.open .solution-content {
+    display: block;
+  }
+
+  .arrow {
+    transition: transform 0.3s;
+  }
+
+  .solution-dropdown.open .arrow {
+    transform: rotate(180deg);
+  }
+
+  .tap-hint { font-size: 0.7rem; margin-top: 20px; color: var(--gold); opacity: 0.6; }
 </style>
 
 <div class="card-container">
-  <div class="quiz-card" onclick="this.classList.toggle('flipped')">
+  <div class="quiz-card" onclick="handleFlip(this, event)">
     <div class="front">
       <h2>BLV</h2>
       <p>Modernized Education</p>
-      <span class="tap-hint">(Click to flip)</span>
+      <span class="tap-hint">CLICK TO REVEAL REASON</span>
     </div>
     <div class="back">
-      <p>Technology is changing the world, people have access to any information they want, leading them to pay attention to their interests that may or may not be taught in schools. We are seeing a rise in online education and information overload. BLV is utilizing technology to make sure that mass information can be applied through practical online learning experiences.</p>
+      <h3>Reason</h3>
+      <p class="reason-text">Technology is changing the world, people have access to any information they want, leading them to pay attention to their interests that may or may not be taught in schools. We are seeing a rise in online education and information overload. BLV is utilizing technology to make sure that mass information can be applied through practical online learning experiences.</p>
+      
+      <div class="solution-dropdown" onclick="toggleSolution(this, event)">
+        <div class="solution-trigger">
+          Solution <span class="arrow">▼</span>
+        </div>
+        <div class="solution-content">
+          Interactive learning software
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="quiz-card" onclick="this.classList.toggle('flipped')">
+  <div class="quiz-card" onclick="handleFlip(this, event)">
     <div class="front">
       <h2>BLV</h2>
       <p>Connection</p>
-      <span class="tap-hint">(Click to flip)</span>
+      <span class="tap-hint">CLICK TO REVEAL REASON</span>
     </div>
     <div class="back">
-      <p>People have become "efficient"—we work remote, we order food to the house, we are educated enough to know when relationships are not in alignment. This is leading to extreme uptake in loneliness & health issues. BLV is creating niche online events that are "efficient" (no cost, travel, etc.) focused on productivity but more importantly, interactions between the attendees sparking potential relationships that are aligned on shared interest, identity, and social standards.</p>
+      <h3>Reason</h3>
+      <p class="reason-text">People have become "efficient"—we work remote, we order food to the house, we are educated enough to know when relationships are not in alignment. This is leading to extreme uptake in loneliness & health issues. BLV is creating niche online events that are "efficient" focused on productivity but more importantly, interactions between the attendees sparking potential relationships.</p>
+      
+      <div class="solution-dropdown" onclick="toggleSolution(this, event)">
+        <div class="solution-trigger">
+          Solution <span class="arrow">▼</span>
+        </div>
+        <div class="solution-content">
+          BLV Bubble events and community coordination
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="quiz-card" onclick="this.classList.toggle('flipped')">
+  <div class="quiz-card" onclick="handleFlip(this, event)">
     <div class="front">
       <h2>BLV</h2>
       <p>Longevity</p>
-      <span class="tap-hint">(Click to flip)</span>
+      <span class="tap-hint">CLICK TO REVEAL REASON</span>
     </div>
     <div class="back">
-      <p>Wellness for the people, in a way that is sustainable for future generations. There is a major imbalance of resources, but the biggest struggle seems to be around lack of productivity and cost of output. Cortisol, Anxiety, and Work demands are at all-time highs, but the ROI is low. BLV aims to help people win their mindset, find alignment, and take care of themselves so they can be MORE productive, lowering daily costs of health input while improving output.</p>
+      <h3>Reason</h3>
+      <p class="reason-text">Wellness for the people, in a way that is sustainable for future generations. There is a major imbalance of resources, but the biggest struggle seems to be around lack of productivity and cost of output. Cortisol, Anxiety, and Work demands are at all-time highs, but the ROI is low. BLV aims to help people win their mindset and find alignment.</p>
+      
+      <div class="solution-dropdown" onclick="toggleSolution(this, event)">
+        <div class="solution-trigger">
+          Solution <span class="arrow">▼</span>
+        </div>
+        <div class="solution-content">
+          Informational Content & Business Consulting / Fundraising
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+<script>
+  function handleFlip(card, event) {
+    // Only flip if the click wasn't inside the solution dropdown
+    if (!event.target.closest('.solution-dropdown')) {
+      card.classList.toggle('flipped');
+    }
+  }
+
+  function toggleSolution(dropdown, event) {
+    event.stopPropagation(); // Prevents the card from flipping shut
+    dropdown.classList.toggle('open');
+  }
+</script>
