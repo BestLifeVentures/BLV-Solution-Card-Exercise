@@ -3,219 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BLV & Partnership Cards</title>
+    <title>BLV Ecosystem & Outreach</title>
     <style>
         :root {
-            /* Gold Gradient Colors */
-            --gold-light: #f9e5af;
-            --gold-mid: #d4af37;
-            --gold-dark: #b8860b;
-            --text-dark: #2c3e50;
-            --black-bg: #1a1a1a;
-            --white-soft: rgba(255, 255, 255, 0.2);
-            --gold-soft: rgba(212, 175, 55, 0.1);
+            --gold-light: #f9e5af; --gold-mid: #d4af37; --gold-dark: #b8860b;
+            --silver-light: #e0e0e0; --silver-mid: #a0a0a0; --silver-dark: #707070;
+            --text-dark: #2c3e50; --black-bg: #1a1a1a;
         }
 
         body {
-            /* Grey background with lined dots pattern */
             background-color: #e5e5f7;
-            background-image: radial-gradient(#444cf744 1px, #e5e5f7 1px);
+            background-image: radial-gradient(#444cf722 1px, #e5e5f7 1px);
             background-size: 20px 20px;
-            margin: 0;
-            padding: 50px 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            margin: 0; padding: 50px 0;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex; flex-direction: column; align-items: center;
         }
 
         .section-title {
-            color: var(--text-dark);
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 20px;
-            font-weight: 800;
+            color: var(--text-dark); text-transform: uppercase;
+            letter-spacing: 4px; margin: 40px 0 20px; font-weight: 800;
         }
 
         .card-container {
-            display: flex;
-            gap: 30px;
-            perspective: 1200px;
-            justify-content: center;
-            flex-wrap: wrap;
-            max-width: 1200px;
-            margin-bottom: 80px;
+            display: flex; gap: 25px; perspective: 1500px;
+            justify-content: center; flex-wrap: wrap;
+            max-width: 1200px; margin-bottom: 20px;
         }
 
         .quiz-card {
-            width: 340px;
-            min-height: 480px;
-            cursor: pointer;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 320px; min-height: 480px; cursor: pointer;
+            position: relative; transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .quiz-card.flipped {
-            transform: rotateY(180deg);
-        }
+        .quiz-card.flipped { transform: rotateY(180deg); }
 
         .front, .back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            display: flex;
-            flex-direction: column;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            box-sizing: border-box;
+            position: absolute; width: 100%; height: 100%;
+            backface-visibility: hidden; display: flex;
+            flex-direction: column; padding: 25px; border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); box-sizing: border-box;
         }
 
-        .back {
-            transform: rotateY(180deg);
-            overflow-y: auto;
-        }
+        .back { transform: rotateY(180deg); overflow-y: auto; }
 
-        /* --- BLV GOLD CARDS STYLE --- */
-        .gold-style .front, .gold-style .back {
-            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-mid) 50%, var(--gold-dark) 100%);
-            color: var(--text-dark);
-            border: 1px solid var(--gold-dark);
-        }
-
-        /* --- PARTNER BLACK CARDS STYLE --- */
-        .black-style .front, .black-style .back {
-            background: linear-gradient(135deg, #2c2c2c 0%, var(--black-bg) 100%);
-            color: var(--gold-mid);
-            border: 1px solid var(--gold-dark);
-        }
+        /* Row Styles */
+        .gold-style .front, .gold-style .back { background: linear-gradient(135deg, var(--gold-light), var(--gold-mid), var(--gold-dark)); color: var(--text-dark); border: 1px solid var(--gold-dark); }
+        .black-style .front, .black-style .back { background: linear-gradient(135deg, #2c2c2c, var(--black-bg)); color: var(--gold-mid); border: 1px solid var(--gold-dark); }
+        .silver-style .front, .silver-style .back { background: linear-gradient(135deg, var(--silver-light), var(--silver-mid), var(--silver-dark)); color: #1a1a1a; border: 1px solid var(--silver-dark); }
+        .white-style .front, .white-style .back { background: #ffffff; color: var(--text-dark); border: 2px solid var(--gold-mid); }
 
         /* Typography */
-        h2 { font-size: 2.2rem; margin: 0; text-transform: uppercase; letter-spacing: 2px; }
-        .front p { font-size: 1.2rem; font-weight: 600; margin-top: 15px; }
-        h3 { font-size: 1.5rem; margin-top: 0; text-transform: uppercase; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 10px; }
-        
-        .content-text, .dropdown-content {
-            font-size: 1.05rem;
-            line-height: 1.6;
-            font-weight: 500;
-        }
-
-        .content-text { margin-bottom: 25px; }
+        h2 { font-size: 1.8rem; margin: 0; text-transform: uppercase; border-bottom: 1px solid currentColor; padding-bottom: 10px; }
+        .front p { font-size: 1.1rem; font-weight: 700; margin-top: 15px; text-transform: uppercase; }
+        h3 { font-size: 1.3rem; margin-top: 0; text-transform: uppercase; opacity: 0.8; }
+        .content-text { font-size: 1rem; line-height: 1.5; margin-bottom: 20px; font-weight: 500; }
 
         /* Dropdown Styles */
-        .dropdown {
-            margin-top: auto;
-            border: 1px solid currentColor;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .dropdown-trigger {
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 800;
-            text-transform: uppercase;
-            cursor: pointer;
-        }
-
-        .dropdown-content {
-            display: none;
-            padding: 20px;
-            border-top: 1px solid rgba(0,0,0,0.1);
-            background: var(--white-soft);
-        }
-
-        .black-style .dropdown-content { background: var(--gold-soft); }
-
+        .dropdown { margin-top: auto; border: 1px solid currentColor; border-radius: 10px; overflow: hidden; }
+        .dropdown-trigger { padding: 12px; display: flex; justify-content: space-between; font-weight: 800; text-transform: uppercase; cursor: pointer; background: rgba(255,255,255,0.1); }
+        .dropdown-content { display: none; padding: 15px; border-top: 1px solid currentColor; background: rgba(255,255,255,0.2); font-size: 0.95rem; }
         .dropdown.open .dropdown-content { display: block; }
-        .arrow { transition: transform 0.3s; }
-        .dropdown.open .arrow { transform: rotate(180deg); }
-
-        .tap-hint { font-size: 0.75rem; margin-top: auto; font-weight: 700; opacity: 0.7; text-align: center;}
+        .tap-hint { font-size: 0.7rem; margin-top: auto; opacity: 0.6; text-align: center; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <h1 class="section-title">Core Pillars</h1>
+    <h1 class="section-title">BLV Core Pillars</h1>
     <div class="card-container gold-style">
         <div class="quiz-card" onclick="handleFlip(this, event)">
-            <div class="front">
-                <h2>BLV</h2>
-                <p>Modernized Education</p>
-                <div class="tap-hint">CLICK TO FLIP</div>
-            </div>
-            <div class="back">
-                <h3>Reason</h3>
-                <div class="content-text">Technology is changing the world, people have access to any information they want, leading them to pay attention to their interests that may or may not be taught in schools. BLV utilizes technology to ensure mass information is applied through practical learning.</div>
-                <div class="dropdown" onclick="toggleDropdown(this, event)">
-                    <div class="dropdown-trigger">Solution <span class="arrow">▼</span></div>
-                    <div class="dropdown-content">Interactive learning software</div>
-                </div>
-            </div>
+            <div class="front"><h2>BLV</h2><p>Modernized Education</p><div class="tap-hint">CLICK TO FLIP</div></div>
+            <div class="back"><h3>Reason</h3><div class="content-text">Technology is changing the world, people have access to any information. BLV utilizes technology to ensure mass information is applied through practical learning.</div><div class="dropdown" onclick="toggleDropdown(this, event)"><div class="dropdown-trigger">Solution <span>▼</span></div><div class="dropdown-content">Interactive learning software</div></div></div>
         </div>
-
         <div class="quiz-card" onclick="handleFlip(this, event)">
-            <div class="front">
-                <h2>BLV</h2>
-                <p>Connection</p>
-                <div class="tap-hint">CLICK TO FLIP</div>
-            </div>
-            <div class="back">
-                <h3>Reason</h3>
-                <div class="content-text">Efficiency is leading to an extreme uptake in loneliness. BLV is creating niche online events focused on productivity and interaction between attendees to spark relationships aligned on shared interests.</div>
-                <div class="dropdown" onclick="toggleDropdown(this, event)">
-                    <div class="dropdown-trigger">Solution <span class="arrow">▼</span></div>
-                    <div class="dropdown-content">BLV Bubble events and community coordination</div>
-                </div>
-            </div>
+            <div class="front"><h2>BLV</h2><p>Connection</p><div class="tap-hint">CLICK TO FLIP</div></div>
+            <div class="back"><h3>Reason</h3><div class="content-text">Efficiency leads to loneliness. BLV creates niche events focused on productivity and relationship-sparking interactions.</div><div class="dropdown" onclick="toggleDropdown(this, event)"><div class="dropdown-trigger">Solution <span>▼</span></div><div class="dropdown-content">BLV Bubble events and community coordination</div></div></div>
         </div>
-
         <div class="quiz-card" onclick="handleFlip(this, event)">
-            <div class="front">
-                <h2>BLV</h2>
-                <p>Longevity</p>
-                <div class="tap-hint">CLICK TO FLIP</div>
-            </div>
-            <div class="back">
-                <h3>Reason</h3>
-                <div class="content-text">Wellness must be sustainable. Modern work demands are at all-time highs with low ROI. BLV aims to help people win their mindset and find alignment to lower the cost of health input and improve output results.</div>
-                <div class="dropdown" onclick="toggleDropdown(this, event)">
-                    <div class="dropdown-trigger">Solution <span class="arrow">▼</span></div>
-                    <div class="dropdown-content">Informational Content & Business Consulting / Fundraising</div>
-                </div>
-            </div>
+            <div class="front"><h2>BLV</h2><p>Longevity</p><div class="tap-hint">CLICK TO FLIP</div></div>
+            <div class="back"><h3>Reason</h3><div class="content-text">Wellness must be sustainable. BLV aims to help people win their mindset and find alignment to lower input costs and improve results.</div><div class="dropdown" onclick="toggleDropdown(this, event)"><div class="dropdown-trigger">Solution <span>▼</span></div><div class="dropdown-content">Informational Content & Consulting / Fundraising</div></div></div>
         </div>
     </div>
 
-    <h1 class="section-title">Partnerships</h1>
+    <h1 class="section-title">Partnership Needs</h1>
     <div class="card-container black-style">
         <div class="quiz-card" onclick="handleFlip(this, event)">
-            <div class="front">
-                <h2>Channel</h2>
-                <p>Collaboration</p>
-                <div class="tap-hint">CLICK TO FLIP</div>
-            </div>
-            <div class="back">
-                <h3>Need</h3>
-                <div class="content-text">Eyeballs</div>
-                <div class="dropdown" onclick="toggleDropdown(this, event)">
-                    <div class="dropdown-trigger">Give <span class="arrow">▼</span></div>
-                    <div class="dropdown-content">Interactive software to sell to their audience, Sponsorships</div>
-                </div>
-            </div>
+            <div class="front"><h2>Channel</h2><p>Collaboration</p><div class="tap-hint">CLICK TO FLIP</div></div>
+            <div class="back"><h3>Need</h3><div class="content-text">Eyeballs</div><div class="dropdown" onclick="toggleDropdown(this, event)"><div class="dropdown-trigger">Give <span>▼</span></div><div class="dropdown-content">Interactive software to sell to their audience, Sponsorships</div></div></div>
         </div>
-
         <div class="quiz-card" onclick="handleFlip(this, event)">
-            <div class="front">
-                <h2>Foundation</h2>
-                <p>Impact</p>
-                <div class="tap-hint">CLICK TO FLIP</div>
-            </div>
-            <div class="back">
-                <h3>Need</h3>
-                <div class="content-text">
+            <div class="front"><h2>Foundation</h2><p>Impact</p><div class="tap-hint">CLICK TO FLIP</div></div>
+            <div class="back"><h3>Need</h3><div class="content-text">MONEY</div><div class="dropdown" onclick="toggleDropdown(this, event)"><div class="dropdown-trigger">Give <span>▼</span></div><div class="dropdown-content">Education metrics, career satisfaction, and fundraising attention.</div></div></div>
+        </div>
+        <div class="quiz-card" onclick="handleFlip(this, event)">
+            <div class="front"><h2>Angel</h2><p>Growth</p><div class="tap-hint">CLICK TO FLIP</div></div>
+            <div class="back"><h3>Need</h3><div class="content-text">MONEY</div><div class="dropdown" onclick="toggleDropdown(this, event)"><div class="dropdown-trigger">Give <span>▼</span></div><div class="dropdown-content">Matched investment desires & partnership support.</div></div></div>
+        </div>
+    </div>
+
+    <h1 class="section-title">Partner Details</h1>
+    <div class="card-container silver-style">
+        <div class="quiz-card" onclick="handleFlip(this, event)">
+            <div class="front"><h2>Channel</h2><p>The Profile</p><div class="tap-hint">CLICK TO FLIP</div></div>
+            <div class="back"><h3>Details</h3><div class="content-text">Social media influencers who make content on mindset, career, finance, business solutions, and relationships.</div></div>
+        </div>
+        <div class="quiz-card" onclick="handleFlip(this, event)">
+            <div class="front"><h2>Foundations</h2><p>The Mission</p><div class="tap-hint">CLICK TO FLIP</div></div>
+            <div class="back"><h3>Details</h3><div class="content-text">Non-profits with vested interest in humanity who believe career alignment, communication, and community is the way.</div></div>
+        </div>
+        <div class="quiz-card" onclick="handleFlip(this, event)">
+            <div class="front"><h2>Angels</h2><p>The Legacy</p><div class="tap-hint">CLICK TO FLIP</div></div>
+            <div class="back"><h3>Details</h3><div class="content-text">Investors looking to leave a legacy, seeking returns by investing in individual startups we consult/facilitate.</div></div>
+        </div>
+    </div>
+
+    <h1 class="section-title">Outreach Strategy</h1>
+    <div class="card-container white-style">
+        <div class="quiz-card" onclick="handleFlip(this, event)">
+            <div class="front"><h2>3 Types of Problems</h2><p>Identification</p><div class="tap-hint">CLICK TO FLIP</div></div>
+            <div class="back"><h3>Layout</h3><div class="content-text">
+                • Known spoken (Talked about)<br>
+                • Known Unspoken (Hidden reality)<br>
+                • Unknown (Unaware)
+            </div></div>
+        </div>
+        <div class="quiz-card" onclick="handleFlip(this, event)">
+            <div class="front"><h2>The Message</h2><p>Direct Outreach</p><div class="tap-hint">CLICK TO FLIP</div></div>
+            <div class="back"><h3>Structure</h3><div class="content-text">
+                1. WHY THEM (Honesty)<br>
+                2. Credibility (Experience)<br>
+                3. Admission (Seeking Solution?)<br>
+                4. WHY Solution (Purpose & ROI)
+            </div><div class="dropdown" onclick="toggleDropdown(this, event)"><div class="dropdown-trigger">Example <span>▼</span></div><div class="dropdown-content">"We focus on creators because you are modern teachers. 90% of content is forgotten in 24hrs; we help people actually apply what they learn."</div></div></div>
+        </div>
+        <div class="quiz-card" onclick="handleFlip(this, event)">
+            <div class="front"><h2>Next Steps</h2><p>The Close</p><div class="tap-hint">CLICK TO FLIP</div></div>
+            <div class="back"><h3>Actions</h3><div class="content-text">
+                • Listen to response/state.<br>
+                • No admission: Create separation.<br>
+                • If YES: Set meeting with Miles.<br>
+                • Keep DMs surface level.
+            </div></div>
+        </div>
+    </div>
+
+    <script>
+        function handleFlip(card, event) {
+            if (!event.target.closest('.dropdown')) {
+                card.classList.toggle('flipped');
+            }
+        }
+        function toggleDropdown(dropdown, event) {
+            event.stopPropagation();
+            dropdown.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
